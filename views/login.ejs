@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/forside.css" type="text/css">
+    <script src="./js/forside.js" defer></script>
+    <title>Forside</title>
+</head>
+<body>
+    <header>
+        <div><img src="./assets/dogLogo.png" alt=""></div>
+        <nav>
+            <li><a href="/">Forside</a></li>
+            <li><a href="/about">Om os</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="/register">Registrer</a></li>
+        </nav>
+    </header>
+    <main>
+        <form action="http://localhost:3000/login2" method="post">
+            <label for="username">Email</label>
+            <input type="email" name="username" id="">
+            <label for="password">password</label>
+            <input type="password" name="password" id="">
+            <button type="submit">login</button>
+            <button type="reset">Slet alt</button>
+           </form>
+    </main>
+</body>
+</html>
