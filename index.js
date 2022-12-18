@@ -11,10 +11,7 @@ import expressEjsLayouts from "express-ejs-layouts";
 
 import UserRouter from './routes/user.route.js'
 import InitRouter from "./routes/init.route.js";
-import ReviewRouter from "./routes/review.route.js";
-import ProductRouter from "./routes/product.route.js";
 import AuthRouter from "./routes/auth.route.js";
-import CategoryRouter from "./routes/category.route.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,24 +31,9 @@ app.use(express.urlencoded({ extended: true}))
 app.use(express.static(__dirname + '/views'));
 
 app.use(UserRouter)
-app.use(ReviewRouter)
-app.use(ProductRouter)
 app.use(InitRouter)
 app.use(AuthRouter)
-app.use(CategoryRouter)
 
-app.get('/a', function(req, res){
-    if (req.session.views) {
-        req.session.views++
-        res.setHeader('Content-Type', 'text/html')
-        res.write('<p>views: ' + req.session.views + '</p>')
-        res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
-        res.end()
-      } else {
-        req.session.views = 1
-        res.end('welcome to the session demo. refresh!')
-      }
- });
 app.get('/', (req,res) => { 
     fs.readFile('./views/index.ejs', null, function (error, data) {
         if (error) {

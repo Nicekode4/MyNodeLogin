@@ -16,7 +16,9 @@ AuthModel.init({
 }, {
 sequelize,
 modelName: 'users',
-freezeTableName: true
+freezeTableName: true,
+createdAt: false,
+updatedAt: false
 })
 
 export default AuthModel
