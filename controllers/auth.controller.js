@@ -1,4 +1,5 @@
 import UserModel from '../models/user.model.js'
+import ejs from 'ejs'
 import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -22,7 +23,9 @@ class AuthController {
                  if (result) {
                      const token = jwt.sign(userdata.id, process.env.PRIVATE_KEY)
                      req.session.user = userdata.firstname
-                     res.json({access_token: token})
+                     res.writeHead(301, {
+                        Location: `/protected`
+                      }).end();
                      
                      
                  } else {
@@ -40,7 +43,14 @@ class AuthController {
             
     }
     protected = async (req, res) => {
-        res.sendStatus(200)
+        console.log();
+        const {  user  } = req.session;
+        
+        console.log(req.session.user);
+  res.render('../views/index.ejs', {
+    user
+  });
+                   
         
     }
 }

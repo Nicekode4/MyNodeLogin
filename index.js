@@ -30,12 +30,18 @@ app.use(session({
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static(__dirname + '/views'));
 
+
+app.set('view engine', 'ejs');
 app.use(UserRouter)
 app.use(InitRouter)
 app.use(AuthRouter)
 
 app.get('/', (req,res) => { 
-    fs.readFile('./views/index.ejs', null, function (error, data) {
+    if (req.session.user == null){
+        // if user is not logged-in redirect back to login page //
+                res.redirect('/login');
+            }else {
+              fs.readFile('./views/index.ejs', null, function (error, data) {
         if (error) {
             res.writeHead(404);
             respone.write('Whoops! File not found!');
@@ -43,11 +49,13 @@ app.get('/', (req,res) => {
             res.write(data);
         }
         res.end();
-    });
+    });  
+            }
+    
  })
 
  app.get('/about', (req,res) => { 
-    res.render('./views/about')
+    res.render('../views/about.ejs')
  })
 
  app.get('/login', (req,res) => { 
